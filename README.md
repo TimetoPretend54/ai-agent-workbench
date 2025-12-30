@@ -1,9 +1,11 @@
-# Kilo + SearxNG + Local LLM Setup
+# Coding Agent + SearxNG + Local LLM Setup
 
 Goal:  
 A local, privacy-respecting AI workflow for coding and planning using:
 
-- Kilo (agent orchestration)
+- [Kilo](https://github.com/Kilo-Org/kilocode) (coding agent) OR
+  - [Roo Code](https://github.com/RooCodeInc/Roo-Code)
+  - [Cline](https://github.com/cline/cline)
 - Ollama (local LLM)
 - SearxNG (local search engine)
 
@@ -74,10 +76,10 @@ Start Ollama (if not already running):
 
 ---
 
-## 3. Kilo Setup
+## 3. Coding Agent Setup
 
 1. Open VS Code  
-2. Install Kilo extension  
+2. Install Kilo (or Other Coding Agent) extension  
 3. Configure provider:
    - API Provider: Ollama  
    - Base URL: http://localhost:11434  
