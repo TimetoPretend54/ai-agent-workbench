@@ -144,7 +144,7 @@ GitHub: https://github.com/QwenLM/qwen-code
 
 ## 4. Using SearXNG w/ Coding Agent - Context Prompt
 
-### [searxng_script_prompt.md](/agent-prompts/searxng_script_prompt.md/)
+#### [searxng_context_prompt.md](/agent-prompts/searxng_context_prompt.md/)
 - Search using SearXNG and use results in planning or coding
 - `Copy/Paste` into Coding Agent's `Task/Prompt`
     - Provides context that should allow agent to search online for information
