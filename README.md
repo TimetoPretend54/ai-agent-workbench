@@ -1,6 +1,10 @@
 # Coding Agent + Metasearch Engine + LLM
 
-Goal:  
+<p align="center">
+    <img src="./docs/assets/ai-agent-workbench.gif" width="90%"/><br>
+</p>
+
+## Goal:
 A local, privacy-respecting AI workflow for coding and planning using:
 
 - Coding Agent (One of the following)
@@ -15,6 +19,7 @@ A local, privacy-respecting AI workflow for coding and planning using:
 
 All fully local, no cloud APIs required.
 
+## Workflow
 ![Workflow Diagram](/docs/assets/workflow.png)
 ---
 
