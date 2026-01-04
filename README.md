@@ -55,6 +55,38 @@ Install Python dependencies:
 
 ---
 
+## Local Hardware Requirements (Ollama + Kilo)
+
+Kilo can run entirely on **local LLMs via Ollama**, but coding agents place **much higher demands** on hardware than simple chat models due to large context windows, planning loops, and tool usage.
+
+### Quick Summary
+
+* **GPU VRAM is the main bottleneck**
+* Coding agents work best with **15–30B models**
+* Large context (16k–32k+) dramatically increases memory usage
+* CPU-only setups are technically possible but **too slow for interactive use**
+
+### Recommended Baseline
+
+| Component | Minimum      | Good Experience |
+| --------- | ------------ | --------------- |
+| GPU       | 8–16 GB VRAM | **24 GB+ VRAM** |
+| RAM       | 32 GB        | **64 GB+**      |
+| CPU       | 6–8 cores    | 8–16 cores      |
+| Storage   | 500 GB SSD   | 1–2 TB NVMe     |
+
+### What This Means in Practice
+
+* **8–16 GB GPUs** → small models (3–7B), limited agent reliability
+* **24 GB GPUs** → usable 15–30B models with tool use
+* **48 GB+ GPUs** → large context, faster planning, smoother agents
+
+> ⚠️ For recommended models like `qwen3-coder:30B`, a **24 GB GPU is strongly recommended**. Smaller GPUs may fall back to CPU and become unusably slow.
+
+> 💡 **Don't meet these requirements?** Consider using hosted LLMs like Qwen Code (Section 2b) which can provide better performance without local hardware constraints. This project supports both local and hosted options.
+
+---
+
 ## 1. SearxNG Setup
 
 1. Copy `.sample.env` → `.env` and fill in a random 32-character secret:
@@ -122,7 +154,7 @@ GitHub: https://github.com/QwenLM/qwen-code
 1. Start SearXNG (if not already running):
 
         python .\scripts\start_searxng_agents.py
-
+    - **NOTE:** Make sure Docker is running on the local machine
 ---
 
 ## 3. Coding Agent Setup
