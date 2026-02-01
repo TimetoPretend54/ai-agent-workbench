@@ -20,6 +20,5 @@ OR
 - Architecture decisions and folder relationships
 - Deployment vs development differences
 - Tool-specific behaviors (Vite, Apache, etc.)
-- Command-line tools usage (e.g., to fetch specific URLs: curl -s "{URL}")
 
 **Key principle:** Future sessions will NOT have current context - only what you document NOW.

@@ -106,8 +106,8 @@ def check_and_start_services():
         except OSError:
             return False
     
-    # Check if SearXNG is running (typically on port 8080)
-    searxng_running = is_port_open("127.0.0.1", 8080)
+    # Check if SearXNG is running (mapped to port 18080 on host)
+    searxng_running = is_port_open("127.0.0.1", 18080)
     
     if not searxng_running:
         print("SearXNG service not detected, starting services...")
