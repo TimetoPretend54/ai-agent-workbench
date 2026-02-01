@@ -433,10 +433,10 @@ def format_results(results: dict, include_full_content: bool = False, fetch_cont
     formatted_output.append("HOW TO ACCESS MORE INFORMATION:")
     formatted_output.append("="*50)
     formatted_output.append("If you need more detailed information from any of the above sources, you can use the following command:")
-    formatted_output.append("python scripts/query_searxng.py --url \"[URL_OF_CHOICE]\"")
+    formatted_output.append("python .kilocode/system/scripts/query_searxng.py --url \"[URL_OF_CHOICE]\"")
     formatted_output.append("")
     formatted_output.append("For example:")
-    formatted_output.append("# python scripts/query_searxng.py --url \"" + results['results'][0]['url'] + "\"")
+    formatted_output.append("# python .kilocode/system/scripts/query_searxng.py --url \"" + results['results'][0]['url'] + "\"")
     formatted_output.append("")
     formatted_output.append("This will fetch the complete content from that specific URL for deeper analysis.")
     
@@ -580,6 +580,43 @@ def main():
             print(f"Input validation error: {e}")
             return
         
+        # Check if SearXNG service is running and start if needed
+        try:
+            import subprocess
+            import socket
+            
+            def is_service_running():
+                try:
+                    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                    sock.settimeout(5)
+                    result = sock.connect_ex(('localhost', 18080))
+                    sock.close()
+                    return result == 0
+                except:
+                    return False
+            
+            if not is_service_running():
+                print("SearXNG service not detected. Starting services...")
+                # Call the start-services function from start_searxng_agents.py
+                subprocess.run([sys.executable, ".kilocode/system/scripts/start_searxng_agents.py", "start-services"],
+                             capture_output=True, text=True)
+                
+                # Wait briefly for service to start
+                import time
+                time.sleep(5)
+                
+                # Double check if it's running now
+                if not is_service_running():
+                    print("Warning: Could not start SearXNG service. Please start it manually.")
+                    return
+                else:
+                    print("SearXNG service is now available!")
+            else:
+                print("SearXNG service is already running.")
+        except Exception as e:
+            print(f"Error checking/starting SearXNG service: {e}")
+            print("Attempting search anyway...")
+        
         results = search_searxng(query, num_results)
         
         if results:
@@ -606,14 +643,14 @@ def main():
                     for i, (url, title) in enumerate(truncated_urls, 1):
                         print(f"{ i }. { title[:60] }{'...' if len(title) > 60 else ''}")
                         print(f"    URL: { url }")
-                        print(f"    Command: python scripts/query_searxng.py --url \"{url}\"")
+                        print(f"    Command: python .kilocode/system/scripts/query_searxng.py --url \"{url}\"")
                     
                     print(f"\n{ '='*50 }")
                     print("TO FETCH ALL TRUNCATED CONTENT:")
                     print(f"{ '='*50 }")
                     print("You can run the following commands separately to get full content:")
                     for url, title in truncated_urls:
-                        print(f"python scripts/query_searxng.py --url \"{url}\"")
+                        print(f"python .kilocode/system/scripts/query_searxng.py --url \"{url}\"")
         else:
             print("No results returned from search.")
     except KeyboardInterrupt:

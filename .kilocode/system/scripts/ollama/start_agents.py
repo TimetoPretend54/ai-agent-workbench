@@ -9,7 +9,7 @@ import shutil
 
 LOCK_FILE = Path.home() / ".kilo_local_ai.lock"
 OLLAMA_HOST = ("127.0.0.1", 11434)
-SEARXNG_COMPOSE_PATH = Path("./docker/searxng/docker-compose.yml")
+SEARXNG_COMPOSE_PATH = Path(".kilocode/system/docker/searxng/docker-compose.yml")
 ENV_FILE = Path("./.env")
 FORCE = "--force" in sys.argv or "-f" in sys.argv
 

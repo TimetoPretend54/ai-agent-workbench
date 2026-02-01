@@ -26,18 +26,28 @@ All fully local, no cloud APIs required.
 ## Repository Layout
 
 ```
-kilo-local-ai/
-├── scripts/
-│   ├── start_agents.py
-│   └── query_searxng.py
-├── docker/
-│   └── searxng/
-│       ├── docker-compose.yml
-│       └── settings.yml
+ai-agent-workbench/
+├── .kilocode/
+│   ├── skills/                           # Agent skills (see global setup below)
+│   ├── workflows/                        # Agent workflows (see global setup below)
+│   ├── rules/                            # Custom rules for agent behavior and permissions
+│   └── system/                           # System components
+│       ├── scripts/                      # Scripts accessible from any project
+│       │   ├── start_searxng_agents.py   # Starts SearXNG services
+│       │   ├── query_searxng.py          # Queries SearXNG search engine
+│       │   └── ollama/
+│       │       └── start_agents.py       # Starts Ollama services
+│       └── docker/                       # Docker configurations
+│           └── searxng/
+│               ├── docker-compose.yml
+│               └── settings.yml
 ├── .sample.env
-├── .env                # not committed
-├── README.md
+├── .env                                  # Not committed
+└── README.md
 ```
+
+## Global Setup (~/.kilocode/)
+For global setup instructions (symlink setup for cross-project access), see [.kilocode/README.md#global-system-setup](/.kilocode/README.md#global-system-setup).
 
 ---
 
@@ -94,7 +104,6 @@ Kilo can run entirely on **local LLMs via Ollama**, but coding agents place **mu
     SEARX_SECRET_KEY=your_random_32_char_secret_here
     ```
 ---
-
 ## 2. LLM Setup (Local or Hosted)
 
 You have **two options** for the coding agent LLM:
@@ -108,22 +117,26 @@ You have **two options** for the coding agent LLM:
 1. Pull the recommended model:
 
         ollama pull qwen3:4b
+#### Optional Setup (everytime)
 
-#### Setup (everytime)
+1. Manually start Ollama & SearXNG (if not already running):
 
-1. Start Ollama & SearXNG (if not already running):
+        python .kilocode/system/scripts/ollama/start_agents.py
 
-        python scripts/start_agents.py
+- The script starts Ollama and SearxNG (Docker)
+- Health summary will indicate both are running
 
+**Automatic Alternative:**
 
-- The script starts Ollama and SearxNG (Docker)  
-- Health summary will indicate both are running  
+- Services will be automatically started when needed by the query script
+- No manual setup required - the system handles startup automatically
 
 **Notes:**
 
-- Ollama is fully local, private, and no cloud API is needed  
-- Memory usage scales with model size and context  
+- Ollama is fully local, private, and no cloud API is needed
+- Memory usage scales with model size and context
 - Default context: 8192, can increase up to 32000 (adjust for RAM)
+
 
 ---
 
@@ -148,15 +161,19 @@ GitHub: https://github.com/QwenLM/qwen-code
    - Credentials are cached locally  
 
 ✅ Only needs to be done **once**.
+#### Optional Setup (everytime)
 
-#### Setup (everytime)
+1. Manually start SearXNG (if not already running):
 
-1. Start SearXNG (if not already running):
-
-        python .\scripts\start_searxng_agents.py
+        python .kilocode\system\scripts\start_searxng_agents.py
     - **NOTE:** Make sure Docker is running on the local machine
----
 
+**Automatic Alternative:**
+
+- SearXNG will be automatically started when needed by the query script
+- No manual setup required - the system handles startup automatically
+
+---
 ## 3. Coding Agent Setup
 
 1. Open VS Code  
@@ -178,15 +195,14 @@ GitHub: https://github.com/QwenLM/qwen-code
 
 ---
 
+## 4. Using SearXNG w/ Coding Agent
 
-## 4. Using SearXNG w/ Coding Agent - Context Prompt
-
-#### [searxng_context_prompt.md](/agent-prompts/searxng_context_prompt.md/)
+#### [internet-search-searxng skill](/.kilocode/skills/internet-search-searxng/SKILL.md/)
 - Search using SearXNG and use results in planning or coding
-- `Copy/Paste` into Coding Agent's `Task/Prompt`
-    - Provides context that should allow agent to search online for information
----
 
+#### [internet-search-searxng workflow](/.kilocode/workflows/internet-search-searxng.md/)
+- Manual workflow to access the same functionality as the skill (since skills cannot be manually executed yet)
+---
 ## 5. Planned Features
 
 ### 5.1 VS Code Extension (Auto-Start Agents)
@@ -211,5 +227,5 @@ Status: Planned / TODO
 ## 6. Kilo VS Code
 
 > Did you know you can have Kilo Code on the right side of VS Code? Gives you easy access to Kilo Code and your file browser at the same time. 
->
+
 >Just right click on the Kilo Code icon and say "Move to" --> "Secondary side bar"

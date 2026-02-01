@@ -1,0 +1,43 @@
+# .kilocode Directory
+
+This directory contains project-specific configurations and workflows for Kilo Code integration.
+
+## Available Components
+
+| Component Name | Type | Description | Can Trigger as Workflow |
+|----------------|------|-------------|------------------------|
+| internet-search-searxng | Skill | Search the internet using SearXNG metasearch engine and use results for planning or coding tasks | Yes |
+| example-skill | Skill | An example skill to demonstrate the skill format and capabilities | Yes |
+
+## Global System Setup
+
+To use the global system components (scripts, docker configs) across multiple workspaces, create a symlink:
+
+This allows global access to system scripts like `~/.kilocode/system/scripts/query_searxng.py` from any project context.
+
+Replace `{path_to_repo}` with the actual path to this repository on your system.
+
+### Mac/Linix
+```bash
+# From your home directory, create a symlink to the system kilocode directory
+ln -s {path_to_repo}/.kilocode/ ~/.kilocode/
+```
+
+### Windows
+Or on Windows (Command Prompt as Administrator):
+```bash
+mklink /D %USERPROFILE%\.kilocode {path_to_repo}\.kilocode
+```
+- Powershell: prefix w/ `cmd /c`
+
+## Structure
+- `workflows/` - Contains workflow definitions that automate repetitive tasks by defining step-by-step instructions for Kilo Code to execute
+  - NOTE: Skills should be used instead if possible
+  - Use `workflows/` to trigger the skill manually
+- `skills/` - Contains skills that extend agent capabilities with specialized knowledge and workflows  
+- `system/` - Contains system components including scripts and docker configurations
+
+## Purpose
+The `.kilocode` directory follows the Kilo Code standard structure for project customization, enabling automated workflows and custom configurations specific to this project.
+
+For more information about Kilo Code workflows, visit: https://kilo.ai/docs/customize/workflows

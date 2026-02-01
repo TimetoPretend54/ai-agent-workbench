@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 
 LOCK_FILE = Path.home() / ".kilo_local_ai_searxng.lock"
-SEARXNG_COMPOSE_PATH = Path("./docker/searxng/docker-compose.yml")
+SEARXNG_COMPOSE_PATH = Path(".kilocode/system/docker/searxng/docker-compose.yml")
 ENV_FILE = Path("./.env")
 FORCE = "--force" in sys.argv or "-f" in sys.argv
 
@@ -94,5 +94,42 @@ def main():
         release_lock()
         print("Lock released.")
 
+def check_and_start_services():
+    """Function to check if services are running and start them if needed"""
+    print("Checking if SearXNG service is available...")
+    
+    import socket
+    def is_port_open(host, port):
+        try:
+            with socket.create_connection((host, port), timeout=5):
+                return True
+        except OSError:
+            return False
+    
+    # Check if SearXNG is running (typically on port 8080)
+    searxng_running = is_port_open("127.0.0.1", 8080)
+    
+    if not searxng_running:
+        print("SearXNG service not detected, starting services...")
+        acquire_lock()
+        start_searxng()
+        
+        # Wait a bit for the service to start
+        print("Waiting for SearXNG to start...")
+        time.sleep(10)
+        
+        # Double check if it's now running
+        searxng_running = is_port_open("127.0.0.1", 8080)
+        if searxng_running:
+            print("SearXNG service is now available!")
+        else:
+            print("Warning: SearXNG may not have started correctly.")
+    else:
+        print("SearXNG service is already running.")
+
 if __name__ == "__main__":
-    main()
+    # Check if this script is being called with 'start-services' argument
+    if len(sys.argv) > 1 and sys.argv[1] == "start-services":
+        check_and_start_services()
+    else:
+        main()
