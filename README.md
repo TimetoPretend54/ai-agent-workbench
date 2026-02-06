@@ -192,7 +192,14 @@ GitHub: https://github.com/QwenLM/qwen-code
       - Model: `qwen3-coder-plus` (or `qwen3-coder-flash`)   
       - Context size: NA
       - Usage: Prompt Kilo normally — free tier ~2,000 requests/day, 60 requests/min.
-
+4. Kilo -> Settings
+   1. Providers
+      1. Model Reasoning Effort -> High (Default is None)
+   2. Context
+      1. Enable "Automatically trigger intelligent context condensing"
+      2. Set to 50%
+         1. Otherwise models will often fail much earlier due to token message sizing
+         2. https://www.reddit.com/r/kilocode/comments/1m85q77/context_window_management_good_case_practices/
 ---
 
 ## 4. Using SearXNG w/ Coding Agent
