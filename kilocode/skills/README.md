@@ -2,7 +2,7 @@
 
 This directory contains skills that extend agent capabilities with specialized knowledge and workflows.
 
-For a complete list of available components (including both skills and workflows), see [.kilocode/README.md#available-components](../README.md#available-components).
+For a complete list of available components (including both skills and workflows), see [kilocode/README.md#available-components](../README.md#available-components).
 
 ## About Skills
 

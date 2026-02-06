@@ -5,9 +5,9 @@ services:
     image: searxng/searxng:latest
     container_name: searxng
     ports:
-      - "18080:8080"  # Host:Container, Using a more unused host port (18080 for localhost to avoid conflicts)
+      - "18080:8080"                # Host:Container, Using a more unused host port (18080 for localhost to avoid conflicts)
     volumes:
       - ./settings.yml:/etc/searxng/settings.yml
     env_file:
-      - ../../.env            # relative path to expected .env file on repo root
+      - ../../../../.env            # relative path to expected .env file on repo root
     restart: unless-stopped

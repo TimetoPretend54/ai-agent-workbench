@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 
 LOCK_FILE = Path.home() / ".kilo_local_ai_searxng.lock"
-SEARXNG_COMPOSE_PATH = Path(".kilocode/system/docker/searxng/docker-compose.yml")
+SEARXNG_COMPOSE_PATH = Path("kilocode/system/docker/searxng/docker-compose.yml")
 ENV_FILE = Path("./.env")
 FORCE = "--force" in sys.argv or "-f" in sys.argv
 

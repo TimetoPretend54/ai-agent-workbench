@@ -1,6 +1,9 @@
-# .kilocode Directory
+# kilocode Directory
 
 This directory contains project-specific configurations and workflows for Kilo Code integration.
+
+## Why not .kilocode? Global KiloCode Repo
+Sets a Global symlink, to avoid duplicating rules into context, avoid using `.kilocode`
 
 ## Available Components
 
@@ -20,13 +23,13 @@ Replace `{path_to_repo}` with the actual path to this repository on your system.
 ### Mac/Linix
 ```bash
 # From your home directory, create a symlink to the system kilocode directory
-ln -s {path_to_repo}/.kilocode/ ~/.kilocode/
+ln -s {path_to_repo}/kilocode/ ~/.kilocode/
 ```
 
 ### Windows
 Or on Windows (Command Prompt as Administrator):
 ```bash
-mklink /D %USERPROFILE%\.kilocode {path_to_repo}\.kilocode
+mklink /D %USERPROFILE%\.kilocode {path_to_repo}\kilocode
 ```
 - Powershell: prefix w/ `cmd /c`
 
@@ -38,6 +41,21 @@ mklink /D %USERPROFILE%\.kilocode {path_to_repo}\.kilocode
 - `system/` - Contains system components including scripts and docker configurations
 
 ## Purpose
-The `.kilocode` directory follows the Kilo Code standard structure for project customization, enabling automated workflows and custom configurations specific to this project.
+The `kilocode` directory follows the Kilo Code standard structure for project customization, enabling automated workflows and custom configurations specific to this project.
 
 For more information about Kilo Code workflows, visit: https://kilo.ai/docs/customize/workflows
+
+## Ongoing Issues
+- [] https://github.com/Kilo-Org/kilocode/issues/5256
+  - Had to revert to 4.145.0, introduced in v4.146.0
+  - Current version still broken: 5.4.0
+  - Waiting for Fix: https://github.com/Kilo-Org/kilocode/pull/5377
+- [] https://github.com/Kilo-Org/kilocode/discussions/5443
+  - Waiting for manually triggering skills
+- [X] https://github.com/Kilo-Org/kilocode/issues/4498
+  - OpenRouter Provider forces token cost for Autocomplete
+  - Need support to manually select
+  - Otherwise getting charged even when selecting free model
+  - EDIT: FIXED, Can now turn off autocomplete via settings again
+- [] https://github.com/Kilo-Org/kilocode/discussions/1563
+  - Preview Diff/Changes (similar to Cursor)

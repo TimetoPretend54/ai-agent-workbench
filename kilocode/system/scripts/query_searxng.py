@@ -433,10 +433,10 @@ def format_results(results: dict, include_full_content: bool = False, fetch_cont
     formatted_output.append("HOW TO ACCESS MORE INFORMATION:")
     formatted_output.append("="*50)
     formatted_output.append("If you need more detailed information from any of the above sources, you can use the following command:")
-    formatted_output.append("python .kilocode/system/scripts/query_searxng.py --url \"[URL_OF_CHOICE]\"")
+    formatted_output.append("python kilocode/system/scripts/query_searxng.py --url \"[URL_OF_CHOICE]\"")
     formatted_output.append("")
     formatted_output.append("For example:")
-    formatted_output.append("# python .kilocode/system/scripts/query_searxng.py --url \"" + results['results'][0]['url'] + "\"")
+    formatted_output.append("# python kilocode/system/scripts/query_searxng.py --url \"" + results['results'][0]['url'] + "\"")
     formatted_output.append("")
     formatted_output.append("This will fetch the complete content from that specific URL for deeper analysis.")
     
@@ -598,7 +598,7 @@ def main():
             if not is_service_running():
                 print("SearXNG service not detected. Starting services...")
                 # Call the start-services function from start_searxng_agents.py
-                subprocess.run([sys.executable, ".kilocode/system/scripts/start_searxng_agents.py", "start-services"],
+                subprocess.run([sys.executable, "kilocode/system/scripts/start_searxng_agents.py", "start-services"],
                              capture_output=True, text=True)
                 
                 # Wait briefly for service to start
@@ -643,14 +643,14 @@ def main():
                     for i, (url, title) in enumerate(truncated_urls, 1):
                         print(f"{ i }. { title[:60] }{'...' if len(title) > 60 else ''}")
                         print(f"    URL: { url }")
-                        print(f"    Command: python .kilocode/system/scripts/query_searxng.py --url \"{url}\"")
+                        print(f"    Command: python kilocode/system/scripts/query_searxng.py --url \"{url}\"")
                     
                     print(f"\n{ '='*50 }")
                     print("TO FETCH ALL TRUNCATED CONTENT:")
                     print(f"{ '='*50 }")
                     print("You can run the following commands separately to get full content:")
                     for url, title in truncated_urls:
-                        print(f"python .kilocode/system/scripts/query_searxng.py --url \"{url}\"")
+                        print(f"python kilocode/system/scripts/query_searxng.py --url \"{url}\"")
         else:
             print("No results returned from search.")
     except KeyboardInterrupt:

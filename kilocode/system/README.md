@@ -14,7 +14,7 @@ To create a symbolic link from this system directory to your global Kilo Code sy
 
 ```bash
 # Link the system directory to the global system directory
-mklink /D "%USERPROFILE%\.kilocode\system" "{path_to_repo}\.kilocode\system"
+mklink /D "%USERPROFILE%\.kilocode\system" "{path_to_repo}\kilocode\system"
 ```
 
 Replace `{path_to_repo}` with the actual path to this repository on your system.
@@ -22,7 +22,7 @@ Replace `{path_to_repo}` with the actual path to this repository on your system.
 ### Linux/Mac
 ```bash
 # Create the symbolic link
-ln -s {path_to_repo}/.kilocode/system ~/.kilocode/system
+ln -s {path_to_repo}/kilocode/system ~/.kilocode/system
 ```
 
 **Note**: This provides a consistent path for accessing system scripts like `~/.kilocode/system/scripts/query_searxng.py` from any project context.

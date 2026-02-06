@@ -1,4 +1,11 @@
-# Validation and Compliance Rule
+---
+name: Validation and Compliance
+globs: "**/*"
+alwaysApply: true
+description: Ensure tasks are validated through testing and user instructions are followed precisely
+---
+
+# Validation and Compliance
 
 ## Purpose
 Ensure that all tasks are validated through actual testing rather than assumptions, and that user instructions are followed precisely.

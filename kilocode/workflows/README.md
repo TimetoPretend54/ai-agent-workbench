@@ -2,7 +2,7 @@
 
 This directory contains workflow definitions that automate repetitive tasks by defining step-by-step instructions for Kilo Code to execute.
 
-For a complete list of available components (including both skills and workflows), see [.kilocode/README.md#available-components](../README.md#available-components).
+For a complete list of available components (including both skills and workflows), see [kilocode/README.md#available-components](../README.md#available-components).
 
 ## Usage
 Invoke any workflow by typing `/[workflow-name.md]` in the chat.
