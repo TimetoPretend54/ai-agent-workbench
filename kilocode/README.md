@@ -9,8 +9,10 @@ Sets a Global symlink, to avoid duplicating rules into context, avoid using `.ki
 
 | Component Name | Type | Description | Can Trigger as Workflow |
 |----------------|------|-------------|------------------------|
-| internet-search-searxng | Skill | Search the internet using SearXNG metasearch engine and use results for planning or coding tasks | Yes |
-| example-skill | Skill | An example skill to demonstrate the skill format and capabilities | Yes |
+| | internet-search-searxng | Skill | Search the internet using SearXNG metasearch engine and use results for planning or coding tasks | Yes |
+| | example-skill | Skill | An example skill to demonstrate the skill format and capabilities | Yes |
+| | research | Skill | Workflow to gather context and explore relevant information when a user asks to investigate a topic, ticket, or code area before planning or coding. | Yes |
+| | new-assignment | Skill | Workflow to plan and prepare for implementing a new assignment when a user asks to start work on an issue, ticket, or assignment. | Yes |
 
 ## Global System Setup
 

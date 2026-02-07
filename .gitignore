@@ -3,3 +3,7 @@
 
 # Python
 __pycache__
+
+# Kilocode plans and context
+plans/
+context/
