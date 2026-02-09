@@ -48,7 +48,7 @@
 - [ ] Remove mock code in `path/to/file`
 
 ## Quick Start for New Code Agent / Task
-**Context:** `~/.kilocode/context/{TOPIC}_CONTEXT.md`  
+**Context:** `~/.kilocode/context/{TOPIC}.context.md`  
 **First:** Create/modify `path/to/first/file`  
 **Order:** Phase 1 -> Phase 2 -> ...  
 **Test:** `{test command}`

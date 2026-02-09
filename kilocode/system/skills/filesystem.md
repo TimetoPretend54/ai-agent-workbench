@@ -22,6 +22,10 @@ Rules:
 - short_name: lowercase snake_case, max 4–5 words
 - If no assignment number exists, use {short_name}.plan.md
 
+Examples:
+- ASSIGN-1_fullstack-app-feat-poc.plan.md
+- PROJ-15_fullstack-authentication_wrapper.plan.md
+
 ---
 
 ## Context
@@ -33,7 +37,7 @@ Location:
 ~/.kilocode/context/
 
 Naming:
-{TOPIC}_CONTEXT.md
+{TOPIC}.context.md
 
 Rules:
 - TOPIC: uppercase
@@ -41,6 +45,6 @@ Rules:
 - No spaces in filenames
 
 Examples:
-- KAFKA_CONTEXT.md
-- AUTH_SSO_CONTEXT.md
-- OPENROUTER_MODELS_CONTEXT.md
+- KAFKA.context.md
+- AUTH_SSO.context.md
+- OPENROUTER_MODELS.context.md
