@@ -8,12 +8,14 @@
 A local, privacy-respecting AI workflow for coding and planning using:
 
 - Coding Agent (One of the following)
+  - [OpenCode](https://github.com/anomalyco/opencode)
   - [Kilo](https://github.com/Kilo-Org/kilocode)
   - [Roo Code](https://github.com/RooCodeInc/Roo-Code)
   - [Cline](https://github.com/cline/cline)
 - LLM (One of the following)
   - [Ollama](https://github.com/ollama/ollama)
   - [Qwen Code](https://github.com/QwenLM/qwen-code)
+  - [OpenRouter](https://openrouter.ai/)
 - Metasearch Engine
   - [SearxNG](https://github.com/searxng/searxng)
 
@@ -27,27 +29,42 @@ All fully local, no cloud APIs required.
 
 ```
 ai-agent-workbench/
-├── kilocode/
-│   ├── skills/                           # Agent skills (see global setup below)
-│   ├── workflows/                        # Agent workflows (see global setup below)
-│   ├── rules/                            # Custom rules for agent behavior and permissions
-│   └── system/                           # System components
-│       ├── scripts/                      # Scripts accessible from any project
-│       │   ├── start_searxng_agents.py   # Starts SearXNG services
-│       │   ├── query_searxng.py          # Queries SearXNG search engine
-│       │   └── ollama/
-│       │       └── start_agents.py       # Starts Ollama services
-│       └── docker/                       # Docker configurations
-│           └── searxng/
-│               ├── docker-compose.yml
-│               └── settings.yml
+├── agents/                                  # Unified agent configurations
+│   ├── skills/                              # Universal skills (used by all agents)
+│   │   ├── research/                        # Research skill
+│   │   ├── new-assignment/                  # New assignment planning skill
+│   │   ├── internet-search-searxng/        # Web search skill
+│   │   └── example-skill/                   # Example skill template
+│   ├── context/                             # Shared context files (created on first use)
+│   ├── plans/                               # Shared plan files (created on first use)
+│   ├── system/                              # Shared system utilities
+│   │   ├── skills/                          # Shared skill system files
+│   │   ├── scripts/                         # Scripts (query_searxng.py, etc.)
+│   │   └── docker/                          # Docker configs (SearXNG)
+│   ├── kilocode/                            # KiloCode-specific (workflows, rules)
+│   │   ├── workflows/                       # KiloCode workflows
+│   │   └── rules/                           # KiloCode rules
+│   └── opencode/                            # OpenCode-specific (commands, AGENTS.md)
+│       ├── commands/                        # OpenCode commands (/research, etc.)
+│       ├── AGENTS.md                        # OpenCode operational rules
+│       └── opencode.json                    # OpenCode permission config
 ├── .sample.env
-├── .env                                  # Not committed
+├── .env                                     # Not committed
 └── README.md
 ```
 
-## Global Setup (~/kilocode/)
-For global setup instructions (symlink setup for cross-project access), see [kilocode/README.md#global-system-setup](/kilocode/README.md#global-system-setup).
+## Global Setup (~/agents/)
+
+For global symlink setup instructions (making agents available in home directory), see [agents/README.md#global-setup](/.agents/README.md#global-setup).
+
+The `~/` paths used by agents will be:
+
+- Skills: `~/.agents/skills/`
+- Context: `~/.agents/context/`
+- Plans: `~/.agents/plans/`
+- System: `~/.agents/system/`
+- KiloCode: `~/.kilocode/`
+- OpenCode: `~/.config/opencode/`
 
 ---
 
@@ -121,7 +138,7 @@ You have **two options** for the coding agent LLM:
 
 1. Manually start Ollama & SearXNG (if not already running):
 
-        python kilocode/system/scripts/ollama/start_agents.py
+        python agents/system/scripts/ollama/start_agents.py
 
 - The script starts Ollama and SearxNG (Docker)
 - Health summary will indicate both are running
@@ -165,7 +182,7 @@ GitHub: https://github.com/QwenLM/qwen-code
 
 1. Manually start SearXNG (if not already running):
 
-        python kilocode\system\scripts\start_searxng_agents.py
+        python agents/system/scripts/start_searxng_agents.py
     - **NOTE:** Make sure Docker is running on the local machine
 
 **Automatic Alternative:**
@@ -204,10 +221,10 @@ GitHub: https://github.com/QwenLM/qwen-code
 
 ## 4. Using SearXNG w/ Coding Agent
 
-#### [internet-search-searxng skill](/kilocode/skills/internet-search-searxng/SKILL.md/)
+#### [internet-search-searxng skill](/agents/skills/internet-search-searxng/SKILL.md/)
 - Search using SearXNG and use results in planning or coding
 
-#### [internet-search-searxng workflow](/kilocode/workflows/internet-search-searxng.md/)
+#### [internet-search-searxng workflow](/agents/kilocode/workflows/internet-search-searxng.md/)
 - Manual workflow to access the same functionality as the skill (since skills cannot be manually executed yet)
 ---
 ## 5. Planned Features
@@ -227,7 +244,7 @@ Status: Planned / TODO
 - Use an MCP (Model Context Protocol) server to expose SearxNG as a native tool in Kilo Code  
 - Allows the agent to call the search tool directly, with structured JSON results  
 - Will replace or augment the current `query_searxng.py` script for more robust tool integration  
-- Configuration will live in `kilocode/mcp.json` or global MCP settings
+- Configuration will live in `~/.kilocode/mcp.json` or global MCP settings
 
 ---
 
