@@ -1,0 +1,11 @@
+
+# Trigger Skill Workflow
+
+CONTEXT: You are triggering a skill
+CRITICAL: NAVIGATE TO THE FOLLOWING AND READ, MAKE SURE THIS IS DONE FIRST
+
+## Windows OS
+1. Trigger the skill at %USERPROFILE%/.agents/skills/example-skill/SKILL.md
+
+## Mac / Linux OS
+1. Trigger the skill at ~/.agents/skills/example-skill/SKILL.md

@@ -4,6 +4,19 @@
 # Python
 __pycache__
 
-# Kilocode plans and context
+# Agent persistent data (should not be committed)
 plans/
 context/
+
+# agents/opencode: strict whitelist for OpenCode config
+# 1) Ignore everything in agents/opencode/
+agents/opencode/*
+# 2) Allow specific config files
+!agents/opencode/AGENTS.md
+!agents/opencode/commands/
+!agents/opencode/README.md
+!agents/opencode/opencode.json
+# 3) Within commands/, ignore everything
+agents/opencode/commands/*
+# 4) But allow .md files (command definitions)
+!agents/opencode/commands/**/*.md
