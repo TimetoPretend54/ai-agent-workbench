@@ -35,19 +35,17 @@ ai-agent-workbench/
 │   │   ├── new-assignment/                  # New assignment planning skill
 │   │   ├── internet-search-searxng/        # Web search skill
 │   │   └── example-skill/                   # Example skill template
-│   ├── context/                             # Shared context files (created on first use)
-│   ├── plans/                               # Shared plan files (created on first use)
 │   ├── system/                              # Shared system utilities
 │   │   ├── skills/                          # Shared skill system files
 │   │   ├── scripts/                         # Scripts (query_searxng.py, etc.)
 │   │   └── docker/                          # Docker configs (SearXNG)
 │   ├── kilocode/                            # KiloCode-specific (workflows, rules)
-│   │   ├── workflows/                       # KiloCode workflows
+│   │   ├── workflows/                       # KiloCode workflows (call skills)
 │   │   └── rules/                           # KiloCode rules
-│   └── opencode/                            # OpenCode-specific (commands, AGENTS.md)
-│       ├── commands/                        # OpenCode commands (/research, etc.)
+│   └── opencode/                            # OpenCode-specific (config, rules)
 │       ├── AGENTS.md                        # OpenCode operational rules
-│       └── opencode.json                    # OpenCode permission config
+│       ├── opencode.json                    # OpenCode permission config
+│       └── README.md                        # OpenCode setup documentation
 ├── .sample.env
 ├── .env                                     # Not committed
 └── README.md
@@ -221,11 +219,18 @@ GitHub: https://github.com/QwenLM/qwen-code
 
 ## 4. Using SearXNG w/ Coding Agent
 
+#### Automatic/Manual
+Simply ask your coding agent to search, or type:
+```
+/internet-search-searxng <your query>
+```
+The agent will use the SearXNG skill and return results.
+
 #### [internet-search-searxng skill](/agents/skills/internet-search-searxng/SKILL.md/)
-- Search using SearXNG and use results in planning or coding
+- Full skill documentation and workflow details
 
 #### [internet-search-searxng workflow](/agents/kilocode/workflows/internet-search-searxng.md/)
-- Manual workflow to access the same functionality as the skill (since skills cannot be manually executed yet)
+- Manual workflow (legacy/alternative approach)
 ---
 ## 5. Planned Features
 
