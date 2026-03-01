@@ -7,5 +7,6 @@
     "remove": "ask",
     "rm": "ask",
     "del": "ask"
-  }
+  },
+  "small_model": "something/invalid"
 }
